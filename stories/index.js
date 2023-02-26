@@ -10,7 +10,10 @@ import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
 import InterviewerListItem from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
+import Appointment from "components/Appointment/index.js";
 
+
+// Button Component
 storiesOf("Button", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -27,7 +30,7 @@ storiesOf("Button", module)
     </Button>
   ));
 
-
+// DayListItem Component
 storiesOf("DayListItem", module) //Initiates Storybook and registers our DayListItem component
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -39,7 +42,7 @@ storiesOf("DayListItem", module) //Initiates Storybook and registers our DayList
     <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} /> // action() allows us to create a callback that appears in the actions panel when clicked
   ));
 
-
+// DayList Component  
 const days = [
   {
     id: 1,
@@ -69,10 +72,10 @@ storiesOf("DayList", module)
     <DayList days={days} value={"Tuesday"} onChange={action("setDay")} />
   ))
   .add("Wednesday", () => (
-      <DayList days={days} value={"Wednesday"} onChange={action("setDay")} />
+    <DayList days={days} value={"Wednesday"} onChange={action("setDay")} />
   ));
 
-
+// InterviewerListItem Component
 const interviewer = {
   id: 1,
   name: "Sylvia Palmer",
@@ -107,7 +110,7 @@ storiesOf("InterviewerListItem", module)
     />
   ));
 
-
+// InterviewerList Component
 const interviewers = [
   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
   { id: 2, name: "Tori Malcolm", avatar: "https://i.imgur.com/Nmx0Qxo.png" },
@@ -135,5 +138,20 @@ storiesOf("InterviewerList", module)
     <InterviewerList
       interviewers={interviewers}
       onChange={action("setInterviewer")}
+    />
+  ));
+
+// Appointment Component
+storiesOf("Appointment", module)
+  .addParameters({
+    backgrounds: [{ name: "white", value: "#fff", default: true }]
+  })
+  .add("Appointment", () => (
+    <Appointment
+    />
+  ))
+  .add("Appointment with Time", () => (
+    <Appointment
+      time={"12pm"}
     />
   ));
