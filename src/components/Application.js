@@ -55,7 +55,7 @@ export default function Application(props) {
       setDays(response.data)
       console.log(response)
     });
-  })
+  },[day])
 
   return (
     <main className="layout">
