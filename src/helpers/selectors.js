@@ -28,3 +28,20 @@ export function getInterview(state, interview) {
     }
   }
 }
+
+export function getInterviewersForDay(state, day) {
+  // returns an array of interviewers for that day
+  const results = [];
+  const dayObj = state.days.find(d => d.name === day);
+
+  if (!dayObj) {
+    return [];
+  }
+
+  for (let id of dayObj.interviewers) {
+    const interviewer = state.interviewers[id];
+    results.push(interviewer);
+  }
+  
+  return results;
+}
