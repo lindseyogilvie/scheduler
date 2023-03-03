@@ -37,7 +37,11 @@ export default function Application(props) {
             appointments
           });
           resolve(true);
-        });
+        })
+        .catch(error => {
+          reject(true)
+          console.log(error)
+        })
     });
   }
 
@@ -60,7 +64,10 @@ export default function Application(props) {
             appointments
           });
           resolve(true);
-        });
+        })
+        .catch(error => {
+          reject(true)
+        })
     });
   }
 
