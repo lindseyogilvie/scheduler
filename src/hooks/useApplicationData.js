@@ -9,6 +9,25 @@ export default function useApplicationData() {
     interviewers: {}
   });
 
+  const updateSpotsForDay = (id, appointments, state) => {
+    // get current remaining spots
+    const currentDay = state.days.filter(day => day.appointments.includes(id))[0];
+
+    let newSpots = currentDay.spots
+    
+    // Subtract one if interview is booked, add one if interview is cancelled
+    if (appointments[id].interview) {
+      newSpots -= 1;
+    } else {
+      newSpots += 1;
+    }
+
+    const newDay = {...currentDay, spots: newSpots}
+    const newDays = state.days.map(day => (day.id === newDay.id ? newDay : day))
+
+    return newDays;
+  }
+
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -19,13 +38,20 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+    console.log(state)
+    console.log(state.appointments)
+    console.log(state.days)
+
+
 
     return new Promise((resolve, reject) => {
       axios.put(`/api/appointments/${id}`, interview)
-        .then(response => {
+        .then(() => {
+          const newDays = updateSpotsForDay(id, appointments, state)
           setState({
             ...state,
-            appointments
+            appointments,
+            days: newDays
           });
           resolve(true);
         })
@@ -49,10 +75,12 @@ export default function useApplicationData() {
 
     return new Promise((resolve, reject) => {
       axios.delete(`/api/appointments/${id}`)
-        .then(response => {
+        .then(() => {
+          const newDays = updateSpotsForDay(id, appointments, state)
           setState({
             ...state,
-            appointments
+            appointments, 
+            days: newDays
           });
           resolve(true);
         })
