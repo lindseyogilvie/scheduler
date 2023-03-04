@@ -9,20 +9,39 @@ export default function useApplicationData() {
     interviewers: {}
   });
 
-  const updateSpotsForDay = (id, appointments, state) => {
-    // get current remaining spots
-    const currentDay = state.days.filter(day => day.appointments.includes(id))[0];
+  // const updateSpotsForDay = (id, appointments, state) => {
+  //   // get current remaining spots
+  //   const currentDay = state.days.filter(day => day.appointments.includes(id))[0];
 
-    let newSpots = currentDay.spots
+  //   let newSpots = currentDay.spots
     
-    // Subtract one if interview is booked, add one if interview is cancelled
-    if (appointments[id].interview) {
-      newSpots -= 1;
-    } else {
-      newSpots += 1;
+  //   // Subtract one if interview is booked, add one if interview is cancelled
+  //   if (appointments[id].interview) {
+  //     newSpots -= 1;
+  //   } else {
+  //     newSpots += 1;
+  //   }
+
+  //   const newDay = {...currentDay, spots: newSpots}
+  //   const newDays = state.days.map(day => (day.id === newDay.id ? newDay : day))
+
+  //   return newDays;
+  // }
+
+  const spotsRemaining = (id, appointments, state) => {
+    const currentDay = state.days.filter(day => day.appointments.includes(id))[0];
+    const totalAppointments = currentDay.appointments.length
+    let interviewsScheduled = 0;
+
+    for (let appointment of currentDay.appointments) {
+      if(appointments[appointment].interview) {
+        interviewsScheduled += 1;
+      }
     }
 
-    const newDay = {...currentDay, spots: newSpots}
+    const spotsLeft = totalAppointments - interviewsScheduled
+
+    const newDay = {...currentDay, spots: spotsLeft}
     const newDays = state.days.map(day => (day.id === newDay.id ? newDay : day))
 
     return newDays;
@@ -47,7 +66,7 @@ export default function useApplicationData() {
     return new Promise((resolve, reject) => {
       axios.put(`/api/appointments/${id}`, interview)
         .then(() => {
-          const newDays = updateSpotsForDay(id, appointments, state)
+          const newDays = spotsRemaining(id, appointments, state)
           setState({
             ...state,
             appointments,
@@ -76,7 +95,7 @@ export default function useApplicationData() {
     return new Promise((resolve, reject) => {
       axios.delete(`/api/appointments/${id}`)
         .then(() => {
-          const newDays = updateSpotsForDay(id, appointments, state)
+          const newDays = spotsRemaining(id, appointments, state)
           setState({
             ...state,
             appointments, 
