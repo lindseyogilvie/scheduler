@@ -3,7 +3,7 @@
 
 ## Final Product
 
-!["Screenshot of homepage view"]([https://github.com/lindseyogilvie/scheduler/blob/master/docs/homepage_view.png?raw=true)])
+!["Screenshot of homepage view"](https://github.com/lindseyogilvie/scheduler/blob/master/docs/homepage_view.png?raw=true))
 
 ## Setup
 
