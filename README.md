@@ -1,5 +1,10 @@
 # Interview Scheduler
 
+
+## Final Product
+
+!["Screenshot of homepage view"]([https://github.com/lindseyogilvie/scheduler/blob/master/docs/homepage_view.png])
+
 ## Setup
 
 Install dependencies with `npm install`.
