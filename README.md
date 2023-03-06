@@ -16,7 +16,7 @@
 !["Screenshot of change appointment view"](https://github.com/lindseyogilvie/scheduler/blob/master/docs/change_appointment_view.png?raw=true)
 
 ### Delete Appointment View
-!["Screenshot of delete appointment view"](https://github.com/lindseyogilvie/scheduler/blob/master/docs/delete_appointmnet_view.png?raw=true
+!["Screenshot of delete appointment view"](https://github.com/lindseyogilvie/scheduler/blob/master/docs/delete_appointmnet_view.png?raw=true)
 
 ## Setup
 
