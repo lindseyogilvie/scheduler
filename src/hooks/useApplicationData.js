@@ -45,7 +45,7 @@ export default function useApplicationData() {
 
 
     return new Promise((resolve, reject) => {
-      axios.put(`/api/appointments/${id}`, interview)
+      axios.put(`/api/appointments/${id}`, {interview})
         .then(() => {
           const newDays = spotsRemaining(id, appointments, state)
           setState({
